@@ -1,0 +1,161 @@
+<div class="row">
+<div class="col-sm-10 col-md-10 col-lg-10" style="background-color:white;">
+
+
+  <h2>New {{category}}</h2>
+  <form #f="ngForm" (ngSubmit)="addItem()">
+    <div class="form-group" *ngIf="colons.name">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Name" name="name" [(ngModel)]="item.name" required >
+    </div>
+    <div class="form-group" *ngIf="colons.short_name">
+      <label for="short_name">Short name:</label>
+      <input type="text" class="form-control" id="short_name"  placeholder="short name" name="short_name" [(ngModel)]="item.short_name">
+    </div>
+    <div class="form-group" *ngIf="colons.place">
+      <label for="place">Place :</label>
+      <input type="tel" class="form-control" id="place" placeholder="Place" name="place" [(ngModel)]="item.place">
+    </div>
+    <div class="form-group" *ngIf="colons.date_from">
+      <label for="date_from">Date and time from :</label>
+      <input type="datetime-local" class="form-control" id="date_from"  name="date_from" [(ngModel)]="item.datefrom">
+    </div>
+    <div class="form-group" *ngIf="colons.date_from">
+      <label for="date_to">Date and time to :</label>
+      <input type="datetime-local" class="form-control" id="date_to"  name="date_to" [(ngModel)]="item.dateto">
+    </div>
+    <div class="form-inline" *ngIf="colons.date_from">
+      <label for="eventcheckbox">Create event in Google Calendar:</label>
+      <input type="checkbox" class="form-control" id="eventcheckbox" (change)="changeEventCheckbox()" name="eventcheckbox"   >
+    </div>
+    <div class="form-group" *ngIf="colons.organizer">
+      <label for="organizer">Organizer:</label>
+      <input type="text" class="form-control" id="organizer" placeholder="organizer" name="organizer" [(ngModel)]="item.organizer"  >
+    </div>
+    <div class="form-group" *ngIf="colons.author">
+      <label for="author">Author:</label>
+      <input type="text" class="form-control" id="author" placeholder="Author" name="author" [(ngModel)]="item.author"  >
+    </div>
+    <div class="form-group" *ngIf="colons.year_of_publication">
+      <label for="year_of_publication">Year of publication:</label>
+      <input type="text" class="form-control" id="year_of_publication" placeholder="Year of publication" name="year_of_publication" [(ngModel)]="item.year_of_publication"  >
+    </div>
+    <div class="form-group" *ngIf="colons.editorship">
+      <label for="editorship">Editorship:</label>
+      <input type="text" class="form-control" id="editorship" placeholder="Editorship" name="editorship" [(ngModel)]="item.editorship"  >
+    </div>
+    <div class="form-group" *ngIf="colons.issue_number">
+      <label for="issue_number">Issue number:</label>
+      <input type="text" class="form-control" id="issue_number" placeholder="Issue number" name="issue_number" [(ngModel)]="item.issue_number"  >
+    </div>
+    <div class="form-group" *ngIf="colons.expenses">
+      <label for="name">Expenses:</label>
+      <input type="text" class="form-control" id="expenses" placeholder="Expenses" name="expenses" [(ngModel)]="item.expenses"  >
+    </div>
+    <div class="form-group" *ngIf="colons.literature_type">
+      <label for="literature_type">Literature type:</label>
+      <input type="text" class="form-control" id="literature_type" placeholder="Literature type" name="literature_type" [(ngModel)]="item.literature_type"  >
+    </div>
+    <div class="form-inline">
+    <div class="form-group" *ngIf="colons.visited">
+      <label for="visited">Visited:</label>
+      <input type="checkbox" class="form-control" id="visited" (change)="changeCheckboxValue('visited')" name="visited"   >
+    </div>
+    <div class="form-group" *ngIf="colons.presented">
+      <label for="presented">Presented:</label>
+      <input type="checkbox" class="form-control" id="presented" (change)="changeCheckboxValue('presented')" name="presented"   >
+    </div>
+      <div class="form-group" *ngIf="colons.note">
+        <label for="note">Note:</label>
+        <input type="text" class="form-control" id="note" placeholder="note" name="note" [(ngModel)]="item.note"  >
+      </div>
+    </div>
+    <div class="form-group" *ngIf="colons.files">
+      <label for="file">Foto:</label>
+      <input type="file" id="file" name="file" ng2FileSelect [uploader]="uploader" />
+    </div>
+
+    <div class="container" style="width: 100%" >
+      <div class="row">
+    <h3 *ngIf="external_urls.length>0">External urls</h3>
+      </div>
+    <div *ngFor="let url of external_urls; let i = index">
+      <a target="_blank" href="{{url.url}}" >{{url.comment}}   </a>
+      <a (click)="deleteUrl(i, url.comment)" style="cursor: pointer;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+    </div>
+      <div class="row">
+    <h3>Add external URl</h3>
+      </div>
+    <div class="row">
+    <div class="col-md-4">
+      <input class="form-control" #ext_url [(ngModel)]="ngurl" name="ngurl" id="ext_url" placeholder="Url" name="url"  >
+    </div>
+      <div class="col-md-4">
+        <textarea class="form-control" #url_comment [(ngModel)]="ngcommenturl" name="ngcommenturl" id="ulr_comment" placeholder="Add comment" rows="2"></textarea>
+      </div>
+    <div class="col-md-4">
+      <button class="btn" type="button" id="add_url" (click)="addExternalUrl(ext_url.value, url_comment.value)" style="color: white; background-color: #21b7b7;" >Add link</button>
+    </div>
+    </div>
+    </div>
+
+
+    <h3 *ngIf="intern_links.length>0">Intern links</h3>
+    <div *ngFor="let link of intern_links;let i = index">
+      <span><b>category:</b> {{link.category}}</span>
+      <span><b>name :</b> {{link.name}}</span>
+      <span><b>comment:</b> {{link.comment}}</span>
+      <a (click)="deleteLink(i, link.comment)" style="cursor: pointer;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+    </div>
+    <h3>Add intern links</h3>
+    <div class="container" style="max-width: 100%">
+      <div class="row form-group">
+        <div class="col-md-3">
+          <select class="form-control" #category_select [(ngModel)]="ngcategory" name="ngcategory" (change)="onCategorySelectChange(category_select.value)" id="category_select">
+            <option [value]="''" disabled selected>Select Category</option>
+            <option *ngFor="let cat of all_categories" [value]="cat">
+              {{cat}}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-control" [(ngModel)]="ngitem" name="ngitem" #item_select id="item_select">
+            <option [value]="''" disabled selected>Select item</option>
+            <option *ngFor="let it of items" [value]="it.id">{{it.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <textarea class="form-control" #link_comment id="link_comment" [(ngModel)]="ngcommentlink" name="ngcommentlink" placeholder="Add comment" rows="3"></textarea>
+        </div>
+        <div>
+          <button class="btn" type="button" id="add_link" (click)="addInternLink(category_select.value,item_select.value, link_comment.value)" style="color: white; background-color: #21b7b7;" >Add link</button>
+        </div>
+      </div>
+    </div>
+
+    <h3 *ngIf="selected_tags.length>0">Selected tags</h3>
+    <div *ngFor="let tag of selected_tags;let i = index">
+      <span> {{tag.title}}</span>
+      <a (click)="deleteTag(i, tag.title)" style="cursor: pointer;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+    </div>
+    <h3>Add tags</h3>
+    <div class="row form-group">
+      <div class="col-md-3">
+    <select class="form-control" #tags_select [(ngModel)]="ngtags" name="ngtags" id="tags_select">
+      <option [value]="''" disabled selected>Select tag</option>
+      <option *ngFor="let parent of all_tags" [value]="parent.id">
+        {{parent.title}}
+      </option>
+    </select>
+      </div>
+    <div class="col-md-3">
+      <button class="btn" type="button" id="add_tag" (click)="addTag(tags_select.value)" style="color: white; background-color: #21b7b7;" >Add tag</button>
+    </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-default"  >Save</button>
+  </form>
+</div>
+</div>
+<flash-messages style="position: fixed; left: 25%;top: 50%; width: 50%"></flash-messages>

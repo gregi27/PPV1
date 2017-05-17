@@ -1,0 +1,40 @@
+<div class="col-sm-9 col-md-8 col-lg-8" style="background-color:white;">
+
+  <h2>{{item.name}} </h2>
+  <p *ngIf="item.short_name"><b>Short name:</b> {{item.short_name}} </p>
+  <p *ngIf="item.place"><b>Place:</b> {{item.place}}</p>
+  <p *ngIf="item.datefrom"><b>Start date:</b> {{item.datefrom}}</p>
+  <p *ngIf="item.dateto"><b>End date:</b> {{item.dateto}}</p>
+  <p *ngIf="item.organizer"><b>Organizer:</b> {{item.organizer}} </p>
+  <p *ngIf="item.author"><b>Autor:</b> {{item.author}}</p>
+  <p *ngIf="item.visited"><b>Visited:</b> {{ visited ? 'Yes' : 'NO'}}</p>
+  <p *ngIf="item.presented"><b>Presented:</b> {{ presented ? 'Yes' : 'NO'}}</p>
+  <p *ngIf="item.note"><b>Note:</b> {{item.note}}</p>
+  <p *ngIf="item.year_of_publication"><b>Year of publication:</b> {{item.year_of_publication}}</p>
+  <p *ngIf="item.editor_ship"><b>Editorship:</b> {{item.editor_ship}}</p>
+  <p *ngIf="item.issue_number"><b>Issue number:</b> {{item.issue_number}}</p>
+  <p *ngIf="item.expenses"><b>Expenses:</b> {{item.expenses}}</p>
+  <p *ngIf="item.literature_type"><b>Literature type:</b> {{item.literature_type}}</p>
+
+  <span *ngIf="intern_links.length > 0"><b>intern_links:</b></span>
+  <p *ngFor="let link of intern_links" >
+    <a href="/category/{{link.category}}/{{link.id}}" target="_blank">{{link.name}}</a>
+    <span>{{link.comment}}   </span>
+    <b>category:</b> {{link.category}}
+  </p><br>
+
+  <span *ngIf="external_urls.length > 0"><b>External_urls: </b></span>
+  <p *ngFor="let url of external_urls" ><a href="{{url.url}}" target="_blank">{{url.comment}}</a></p>
+
+  <p *ngIf="used_in_links.length > 0"><b>This record is use in these links:</b></p>
+  <p *ngFor="let link of used_in_links"> <a href="/category/category/{{link.id}}" target="_blank">{{link.name}} </a> </p>
+
+  <p *ngIf="selected_tags.length > 0"><b>Tags for this record:</b></p>
+  <p *ngFor="let tag of selected_tags"> {{tag.title}} </p>
+
+
+
+  <p *ngIf="item.files"><a href="/uploads/{{item.files}}">Otvor súbor</a></p>
+
+
+</div>

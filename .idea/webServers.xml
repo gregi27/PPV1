@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="81ca12f4-7eb6-4c0c-ab1f-f907d0d34fa7" name="miroslav" url="http://kempelen.ii.fmph.uniba.sk">
+        <fileTransfer host="kempelen.ii.fmph.uniba.sk" port="22" rootFolder="/home/miroslav/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,33 @@
+<div class="container" style="max-width: 100%; text-align: center">
+  <div class="row"  >
+    <h1>Pracovná plocha výskumníka</h1>
+  </div>
+
+  <div class="row">
+    <h2>Diplomová práca 2016/2017</h2>
+  </div>
+  <div class="row" style="white-space:pre-line;" >
+    Cieľom práce je aplikácia, ktorá slúži ako knowledge base a zároveň odkladacia skriňa pre výskumníka.
+    Eviduje tam svoje články a prezentácie,posudky, práce,
+    ktoré viedol, správy, pracovné cesty, kontakty, projekty,
+    literatúru, sleduje konferencie a odbornú literatúru,
+    vedie si zoznam svojich citácií a všetko má dostupné kdekoľvek z internetu.
+    Všetky záznamy je možné navzájom previazať, pridávať k nim prílohy, exerné odkazy, klúčové
+    slová a komentáre. Systém má responzívny design. Práca nadväzuje na tri predchádzajúce bakalárske práce,
+    ktoré boli vyvíjané vo frameworku GWT,
+    ktorých výsledkom bolo iba rozpracovanie prototypu, avšak kvôli rozsahu
+    nad rámec bakalárskej práce sa ani raz nepodarilo dospieť k úplnému
+    a nasaditeľnému systému. Applikáciu na základe prototypov je nutné
+    vyvinúť od začiatku, keďže predchádzajúce verzie stavajú na menej aktuálnej
+    technológii. Webová aplikácia naprogramovaná node.js. Z odborného a teoretického
+    hľadiska sa predpokladá, že si študent
+    naštuduje a použije technológie informačných systémov nad rámec štúdijného
+    programu - urobí prehľad moderných frameworkov pre aplikačné servre a jeden
+    z nich využije.
+  </div>
+
+
+<div class="alert alert-danger" *ngIf="!auth.authenticated()">You are NOT logged in </div>
+<div class="alert alert-success" *ngIf="auth.authenticated()">You are logged in </div>
+  <div class="row" *ngIf="!auth.authenticated()"><button class="btn-success" (click)="auth.login()" >Login</button></div>
+</div>

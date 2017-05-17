@@ -1,0 +1,13 @@
+.nav-li a{
+  color: white;
+  background-color: #21b7b7;
+}
+/* mouse over link */
+.nav-li a:hover {
+  background-color: #2151ba;
+}
+/* selected link */
+.nav-li a:active {
+  color: blue;
+}
+

@@ -1,0 +1,106 @@
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql')
+
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'ppv'
+})
+
+connection.connect(function(err) {
+    if (err) throw err
+    console.log('You are connected...')
+})
+
+
+
+router.get('/all/:id', function(req, res, next) {
+    connection.query('SELECT * FROM taglist WHERE user_id = ? ORDER BY id', [req.params.id], function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(res);
+            res.json(results)
+        }
+    })
+});
+
+router.get('/:id', function(req, res, next) {
+    connection.query('SELECT * FROM taglist WHERE taglist.id = ?', [req.params.id], function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(res);
+            res.json(results)
+        }
+    })
+});
+
+router.get('/parent/:id', function(req, res, next) {
+    connection.query('SELECT * FROM taglist WHERE taglist.parentID = ?', [req.params.id], function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(res);
+            res.json(results)
+        }
+    })
+});
+
+router.post('/save', function(req, res, next) {
+    var tag = req.body;
+
+    connection.query('INSERT INTO taglist ('+ Object.keys(tag) +') VALUES (' + Object.keys(tag).map(function(key){return '?'}) + ') ', Object.keys(tag).map(function(key){return tag[key]}),  function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(results);
+            res.json(results)
+        }
+    })
+});
+
+router.post('/insert', function(req, res, next) {
+    var tag = req.body;
+
+    connection.query('UPDATE taglist SET list_of_records = concat(list_of_records, ?) WHERE taglist.id = ?' , [tag.recordId+",", tag.tagId],  function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(results);
+            res.json(results)
+        }
+    })
+});
+
+router.post('/delete', function(req, res, next) {
+    var tag = req.body;
+    var list = "";
+    if (tag.list === "" || tag.list === undefined){
+        list = "";
+    }else{
+        var lastchar = tag.list.substr(tag.list.length-1);
+        if(lastchar ===","){
+            list = tag.list;
+        }else
+            list = tag.list+",";
+    }
+    connection.query('UPDATE taglist SET list_of_records = ? WHERE taglist.id = ?' , [list, tag.tagId],  function(err, results) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else{
+            //console.log(results);
+            res.json(results)
+        }
+    })
+});
+
+module.exports = router;
