@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
     host: 'mysql57.websupport.sk',
     user: 'gregi',
     password: 'password',
-    database: 'gregi'
+    database: 'gregi',
+    port: 3311
 })
 
 connection.connect(function(err) {
