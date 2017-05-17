@@ -3,10 +3,10 @@ var router = express.Router();
 var mysql = require('mysql')
 
 var connection = mysql.createConnection({
-    host: 'mysql57.websupport.sk',
-    user: 'gregi',
-    password: 'password',
-    database: 'gregi',
+    host: '',
+    user: '',
+    password: '',
+    database: '',
     port: 3311
 })
 
