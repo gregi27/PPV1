@@ -16,20 +16,20 @@ import {AuthGuard} from "./auth.guard";
 
 const appRoutes: Routes= [
   {
-    path:'plocha/info',
+    path:'info',
     component: InfoComponent
   },
   {
-    path:'plocha/',
+    path:'',
     component: DashboardComponent,
   },
   {
-    path:'plocha/calendar',
+    path:'calendar',
     component: CalComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:'plocha/tags',
+    path:'tags',
     component: TagsComponent,
     canActivate: [AuthGuard]
   },

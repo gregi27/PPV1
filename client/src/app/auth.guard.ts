@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate{
       return true;
     } else {
       console.log('BLOCKED BY AUTH GUARD');
-      this.router.navigate(['/info']);
+      this.router.navigate(['plocha/info']);
       return false;
     }
   }
